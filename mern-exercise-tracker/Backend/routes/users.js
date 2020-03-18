@@ -1,9 +1,9 @@
 const router = require('express').Router();
-let User = require('../model/user.model');
+let User = require('../models/user.model');
 
 router.route('/').get((req, res) => {
     User.find()
-    .ten(users => res.json(users))
+    .then(users => res.json(users))
     .catch(err => res.status(400).json('Error: '+ err));
 })
 
@@ -11,7 +11,7 @@ router.route('/add').post((req, res) => {
     const username = req.body.username;
     const newUser = new User({username});
     newUser.save()
-    .ten(() => res.json('User added!')
+    .then(() => res.json('User added!')
     .catch(err => res.status.json('Error: '+err)));
 });
 

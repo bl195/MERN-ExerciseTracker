@@ -1,9 +1,9 @@
 const router = require('express').Router();
-let User = require('../model/user.model');
+let Exercise = require('../models/exercise.model');
 
 router.route('/').get((req, res) => {
-    User.find()
-    .ten(users => res.json(users))
+    Exercise.find()
+    .then(exercises => res.json(exercises))
     .catch(err => res.status(400).json('Error: '+ err));
 })
 
@@ -21,7 +21,7 @@ router.route('/add').post((req, res) => {
     });
 
     newExercise.save()
-    .ten(() => res.json('User added!')
+    .then(() => res.json('Exercise added!')
     .catch(err => res.status.json('Error: '+err)));
 });
 
