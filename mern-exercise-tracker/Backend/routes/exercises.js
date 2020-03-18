@@ -1,5 +1,7 @@
 const router = require('express').Router();
 let Exercise = require('../models/exercise.model');
+const bodyParser = require('body-parser');
+router.use(bodyParser.json());
 
 router.route('/').get((req, res) => {
     Exercise.find()
@@ -22,7 +24,7 @@ router.route('/add').post((req, res) => {
 
     newExercise.save()
     .then(() => res.json('Exercise added!')
-    .catch(err => res.status.json('Error: '+err)));
+    .catch(err => res.status(400).json('Error: '+err)));
 });
 
 module.exports = router;
